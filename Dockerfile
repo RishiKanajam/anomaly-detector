@@ -5,19 +5,17 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Create app directory
+# Set working dir
 WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project into the container
+# ✅ Copy everything including models/
 COPY . .
-
-# Expose Flask's default port
-EXPOSE 5000
 
 # Run the Flask app
 CMD ["python", "app/main.py"]
+
 
