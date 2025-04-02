@@ -31,4 +31,22 @@ Hosted with Docker and easily deployable to [Render](https://render.com).
 
 > Scores differ because each model uses a different math technique to calculate "distance from normal."
 
+## ⚠️ Notes
 
+- models/ is not committed to GitHub due to large file limits
+- Models are included in the Docker image at build time
+- LOF and Autoencoder models are optional and excluded in deployment
+- Only iso_forest.pkl, svm.pkl, and scaler.pkl are needed
+
+## 📊 Understanding Score Differences
+Why are scores different across models?
+
+Each model uses a different method:
+
+- Isolation Forest: based on how easily a point is isolated (lower is more normal)
+- One-Class SVM: distance from learned boundary (may have large numeric values)
+- Ensemble: confidence from majority vote (0.0 = normal, 1.0 = anomaly)
+- These scores are not directly comparable — treat each one as a relative indicator within its own model.
+
+📧 Contact
+Made by @RishiKanajam with all the debugging help I can get 😉
