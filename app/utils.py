@@ -9,7 +9,7 @@ def load_models():
     models = {
         'iso_forest': joblib.load(os.path.join(model_dir, 'iso_forest.pkl')),
         'svm': joblib.load(os.path.join(model_dir, 'svm.pkl')),
-        'lof': joblib.load(os.path.join(model_dir, 'lof.pkl')),  # optional if used in ensemble
+        #'lof': joblib.load(os.path.join(model_dir, 'lof.pkl')),  # optional if used in ensemble
         'scaler': joblib.load(os.path.join(model_dir, 'scaler.pkl')),
     }
 
@@ -27,10 +27,10 @@ def predict(model_name, X_scaled, models):
     elif model_name == 'ensemble':
         iso_pred = models['iso_forest'].predict(X_scaled)
         svm_pred = models['svm'].predict(X_scaled)
-        lof_pred = models['lof'].fit_predict(X_scaled)
+        #lof_pred = models['lof'].fit_predict(X_scaled)
 
         # Voting: if 2 or more models say it's an anomaly
-        votes = np.vstack([iso_pred, svm_pred, lof_pred]).T
+        votes = np.vstack([iso_pred, svm_pred]).T
         preds = np.where(np.sum(votes == -1, axis=1) >= 2, -1, 1)
         scores = np.mean(votes == -1, axis=1)
 
