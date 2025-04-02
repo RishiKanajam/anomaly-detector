@@ -1,0 +1,9 @@
+# .gitignore
+models/
+*.pkl
+*.pth
+*.csv
+__pycache__/
+.env
+.venv/
+.ipynb_checkpoints/
